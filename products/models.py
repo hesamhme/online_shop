@@ -8,3 +8,6 @@ class Products(models.Model):
     active = models.BooleanField(default=True)
     time_crated = models.DateTimeField(auto_now_add=True)
     time_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

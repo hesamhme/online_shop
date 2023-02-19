@@ -3,5 +3,11 @@
 products list
 {% endblock %}
 {% block content %}
+    {% for products in products_list %}
+        <h1>{{ products.title }}</h1>
+        <h2>{{ products.price }} :قیمت </h2>
+        -----------------------------
+
+    {% endfor %}
 
 {% endblock %}
