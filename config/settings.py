@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # local app
     'accounts',
     'pages',
+    'products',
     # pack
     'crispy_forms',
     'allauth',
