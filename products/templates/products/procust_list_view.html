@@ -4,9 +4,12 @@ products list
 {% endblock %}
 {% block content %}
     {% for products in products_list %}
-        <h1>{{ products.title }}</h1>
+
+        <a href="{{ products.get_absolute_url }}">
+        {{ products.title }}
+        </a>
         <h2>{{ products.price }} :قیمت </h2>
-        -----------------------------
+
 
     {% endfor %}
 
