@@ -18,6 +18,11 @@ class Products(models.Model):
         return reverse('detail_view', args=[self.pk])
 
 
+class ActiveCommentManager(models.Manager):
+    def get_queryset(self):
+        return super(ActiveCommentManager, self).get_queryset().filter(active=True)
+
+
 class Comment(models.Model):
     POINTS = [
         ('1', 'very bad'),
@@ -33,6 +38,8 @@ class Comment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    object = models.Manager
+    active_comment_manager = ActiveCommentManager()
 
     def get_absolute_url(self):
         return reverse('detail_view', args=[self.product.id])
