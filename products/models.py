@@ -26,7 +26,7 @@ class Comment(models.Model):
         ('4', 'good'),
         ('5', 'perfect'),
     ]
-    products = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='comments')
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comments')
     body = models.TextField()
     stars = models.CharField(max_length=10, choices=POINTS)
@@ -35,5 +35,5 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return reverse('detail_view', args=[self.products_id])
+        return reverse('detail_view', args=[self.product.id])
 
