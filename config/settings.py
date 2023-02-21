@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'accounts',
     'pages',
     'products',
+    'cart',
     # pack
     'crispy_forms',
     'allauth',
