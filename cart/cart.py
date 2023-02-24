@@ -1,3 +1,5 @@
+from products.models import Products
+
 
 class Cart:
     def __init__(self, request):
@@ -30,3 +32,13 @@ class Cart:
 
     def save(self):
         self.session.modified = True
+
+    def __iter__(self):
+        products_id = self.cart.keys()
+        products = Products.objects.filter(id__in=products_id)
+        cart = self.cart.copy()
+
+        for product in products:
+            cart[str(product.id)]['product_obj'] = product
+        for item in cart.values():
+            yield item
