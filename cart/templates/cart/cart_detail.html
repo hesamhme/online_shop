@@ -40,7 +40,8 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
+                                            {% for item in cart %}
+                                                <tr>
                                                 <td class="product-remove text-left"><a href=""><i
                                                         class="flaticon flaticon-cross"></i></a></td>
                                                 <td class="product-thumbnail text-left">
@@ -49,7 +50,7 @@
                                                 </td>
                                                 <td class="product-name wide-column">
                                                     <h3>
-                                                        <a href="product-details.html">محصول شماره یک</a>
+                                                        <a href="product-details.html">{{ item.product_obj.title }}</a>
                                                     </h3>
                                                 </td>
                                                 <td class="product-price">
@@ -69,6 +70,9 @@
                                                             </span>
                                                 </td>
                                             </tr>
+                                            {% endfor %}
+
+
                                             </tbody>
                                         </table>
                                     </div>

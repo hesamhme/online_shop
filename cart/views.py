@@ -20,5 +20,6 @@ def add_to_cat_view(request, product_id):
         cleaned_data = form.cleaned_data
         quantity = cleaned_data['quantity']
         cart.add(product, quantity)
+
     return redirect('cart_detail')
 
