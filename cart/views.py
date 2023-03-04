@@ -23,3 +23,10 @@ def add_to_cat_view(request, product_id):
 
     return redirect('cart_detail')
 
+
+def remove_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Products, id=product_id)
+    cart.remove(product)
+    return redirect('cart_detail')
+
