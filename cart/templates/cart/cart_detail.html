@@ -5,26 +5,25 @@
 {% endblock %}
 
 {% block content %}
-{#    <!-- Breadcrumb area Start -->#}
-{#    <div class="breadcrumb-area bg-color ptb--90" data-bg-color="#f6f6f6">#}
-{#        <div class="container">#}
-{#            <div class="row">#}
-{#                <div class="col-12">#}
-{#                    <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column">#}
-{#                        <h1 class="page-title">سبد خرید</h1>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <!-- Breadcrumb area End -->#}
+    {#    <!-- Breadcrumb area Start -->#}
+    {#    <div class="breadcrumb-area bg-color ptb--90" data-bg-color="#f6f6f6">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-12">#}
+    {#                    <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column">#}
+    {#                        <h1 class="page-title">سبد خرید</h1>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <!-- Breadcrumb area End -->#}
     <!-- Main Content Wrapper Start -->
     <div class="main-content-wrapper">
         <div class="page-content-inner ptb--80">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mb-md--50">
-                        <form class="cart-form" action="#">
                             <div class="row no-gutters">
                                 <div class="col-12">
                                     <div class="table-content table-responsive">
@@ -42,34 +41,41 @@
                                             <tbody>
                                             {% for item in cart %}
                                                 <tr>
-                                                <td class="product-remove text-left"><a href="{% url 'cart_remove' item.product_obj.id %}"><i
-                                                        class="flaticon flaticon-cross"></i></a></td>
-                                                <td class="product-thumbnail text-left">
-                                                    <img src="assets/img/products/prod-10-70x88.jpg"
-                                                         alt="Product Thumnail">
-                                                </td>
-                                                <td class="product-name wide-column">
-                                                    <h3>
-                                                        <a href="product-details.html">{{ item.product_obj.title }}</a>
-                                                    </h3>
-                                                </td>
-                                                <td class="product-price">
+                                                    <td class="product-remove text-left"><a
+                                                            href="{% url 'cart_remove' item.product_obj.id %}"><i
+                                                            class="flaticon flaticon-cross"></i></a></td>
+                                                    <td class="product-thumbnail text-left">
+                                                        <img src="assets/img/products/prod-10-70x88.jpg"
+                                                             alt="Product Thumnail">
+                                                    </td>
+                                                    <td class="product-name wide-column">
+                                                        <h3>
+                                                            <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
+                                                        </h3>
+                                                    </td>
+                                                    <td class="product-price">
                                                             <span class="product-price-wrapper">
                                                                 <span class="money">تومان{{ item.product_obj.price }}</span>
                                                             </span>
-                                                </td>
-                                                <td class="product-quantity">
-                                                    <div class="quantity">
-                                                        <input type="number" class="quantity-input" name="qty"
-                                                               id="qty-1" value="{{ item.quantity }}" min="1">
-                                                    </div>
-                                                </td>
-                                                <td class="product-total-price">
+                                                    </td>
+                                                    <td class="product-quantity">
+                                                        <form action="{% url 'cart_add' item.product_obj.id %}" method="post">
+                                                            {% csrf_token %}
+                                                            <div class="quantity">
+                                                                <input type="number" class="quantity-input" name="quantity"
+                                                                       id="qty-1" value="{{ item.quantity }}"
+                                                                       min="1">{{ item.product_update_quantity_form.inplace }}
+                                                                <button type="submit">به روزرسانی</button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+
+                                                    <td class="product-total-price">
                                                             <span class="product-price-wrapper">
                                                                 <span class="money">{{ item.product_obj.price }} تومان</span>
                                                             </span>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             {% endfor %}
 
 
@@ -83,7 +89,6 @@
                                     <button type="submit" class="cart-form__btn">خالی کردن سبد خرید</button>
                                 </div>
                             </div>
-                        </form>
                     </div>
                     <div class="col-lg-4">
                         <div class="cart-collaterals">
