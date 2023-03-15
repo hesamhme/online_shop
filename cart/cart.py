@@ -17,11 +17,18 @@ class Cart:
     def add(self, product, quantity=1):
         product_id = str(product.id)
 
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0}
+        if not quantity:
+            self.cart.pop(product_id, False)  # remove from the cart
         else:
-            self.cart[product_id]['quantity'] += quantity
+            item = self.cart.setdefault(product_id, {})
+            item['quantity'] = quantity  # set quantity, not add
         self.save()
+
+        # if product_id not in self.cart:
+        #     self.cart[product_id] = {'quantity': 0}
+        # else:
+        #     self.cart[product_id]['quantity'] += quantity
+        # self.save()
 
     def remove(self, product):
         product_id = str(product.id)
